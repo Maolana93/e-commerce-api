@@ -1,0 +1,31 @@
+package com.example.ecommerceappstore.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "product_name")
+@AllArgsConstructor
+@NoArgsConstructor
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "name", nullable = false,unique = true)
+    private String name;
+
+    @Column(name = "long_description", nullable = false)
+    private String longDescription;
+
+    @Column(name = "short_description", nullable = false)
+    private String ShortDescription;
+
+    @Column(name = "price", nullable = false)
+    private Double price;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.REMOVE, optional = false, orphanRemoval = true)
+    private Inventory inventory;
+}
